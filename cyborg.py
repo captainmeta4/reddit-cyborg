@@ -160,11 +160,7 @@ class Rule():
                 return False
 
         #at this point all criteria are satisfied. Act.
-
-        if isinstance(thing, praw.models.Comment):
-            print("rule triggered at "+thing.permalink())
-        elif isinstance(thing, praw.models.Submission):
-            print("rule triggered at "+thing.permalink)
+        print("rule triggered at "+thing.permalink)
 
         return True
 
