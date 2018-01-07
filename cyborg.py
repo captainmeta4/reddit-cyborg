@@ -212,10 +212,10 @@ class Rule():
             parent.mod.approve()
 
         if self.comment:
-            comment.reply(self.comment).mod.distinguish()
+            thing.reply(self.comment).mod.distinguish()
 
         if self.message:
-            comment.author.message(self.message_subject, self.message)
+            thing.author.message(self.message_subject, self.message)
 
         return True
         s
