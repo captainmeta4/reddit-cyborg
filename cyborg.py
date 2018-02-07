@@ -242,13 +242,13 @@ class Bot():
 
         for entry in self.irc_config:
             self.i.add_server(entry,
-                         self.config[entry]['port'],
-                         self.config[entry]['nick'],
-                         self.config[entry]['username'],
-                         self.config[entry]['password'],
-                         self.config[entry]['realname'],
-                         channels=self.config[entry].get('channels',[]),
-                         raw=self.config[entry].get('raw',False)
+                         self.irc_config[entry]['port'],
+                         self.irc_config[entry]['nick'],
+                         self.irc_config[entry]['username'],
+                         self.irc_config[entry]['password'],
+                         self.irc_config[entry]['realname'],
+                         channels=self.irc_config[entry].get('channels',[]),
+                         raw=self.irc_config[entry].get('raw',False)
                          )
 
         
@@ -347,7 +347,7 @@ class Bot():
 
                 yield thing
 
-    def log(self, rule, thing)
+    def log(self, rule, thing):
 
         name=rule.name
         permalink=thing.permalink
