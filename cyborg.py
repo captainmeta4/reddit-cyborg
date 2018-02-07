@@ -165,8 +165,7 @@ class Rule():
                 return False
 
         #at this point all criteria are satisfied. Act.
-
-        print("rule triggered at "+thing.permalink
+        print("rule triggered at "+thing.permalink)
 
         return True
 
