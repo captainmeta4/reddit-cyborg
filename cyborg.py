@@ -165,7 +165,8 @@ class Rule():
                 return False
 
         #at this point all criteria are satisfied. Act.
-        print("rule triggered at "+thing.permalink)
+
+        print("rule triggered at "+thing.permalink
 
         return True
 
@@ -213,10 +214,10 @@ class Rule():
             parent.mod.approve()
 
         if self.comment:
-            thing.reply(self.comment).mod.distinguish()
+            comment.reply(self.comment).mod.distinguish()
 
         if self.message:
-            thing.author.message(self.message_subject, self.message)
+            comment.author.message(self.message_subject, self.message)
 
         return True
         s
