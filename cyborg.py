@@ -165,11 +165,7 @@ class Rule():
                 return False
 
         #at this point all criteria are satisfied. Act.
-
-        if isinstance(thing, praw.models.Comment):
-            print("rule triggered at "+thing.permalink())
-        elif isinstance(thing, praw.models.Submission):
-            print("rule triggered at "+thing.permalink)
+        print("rule triggered at "+thing.permalink)
 
         return True
 
@@ -217,10 +213,10 @@ class Rule():
             parent.mod.approve()
 
         if self.comment:
-            comment.reply(self.comment).mod.distinguish()
+            thing.reply(self.comment).mod.distinguish()
 
         if self.message:
-            comment.author.message(self.message_subject, self.message)
+            thing.author.message(self.message_subject, self.message)
 
         return True
         s
