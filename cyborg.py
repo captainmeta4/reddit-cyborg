@@ -6,6 +6,7 @@ from collections import deque
 import time
 import irclib
 import prawcore
+import threading
 
 #Globals
 
@@ -251,12 +252,21 @@ class Bot():
                          raw=self.irc_config[entry].get('raw',False)
                          )
 
+    
+    def pingpong(self):
+
+        for message in self.i.listen():
+            pass
         
         
 
     def run(self):
 
         self.load_rules()
+
+        #spin off pingpong thread
+        pingpong = threading.Thread(target=self.pingpong, name='pingpong')
+        pingpong.start()
 
         while True:
             try:
