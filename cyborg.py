@@ -214,10 +214,10 @@ class Rule():
             parent.mod.approve()
 
         if self.comment:
-            comment.reply(self.comment).mod.distinguish()
+            thing.reply(self.comment).mod.distinguish()
 
         if self.message:
-            comment.author.message(self.message_subject, self.message)
+            thing.author.message(self.message_subject, self.message)
 
         return True
         s
@@ -363,7 +363,7 @@ class Bot():
         permalink=thing.permalink
         redditor=getattr(thing.author,"name","[deleted]")
 
-        output="{}: Triggered at {} by /u/{}".format(name,permalink,redditor)
+        output="{}: Triggered by /u/{} at http://reddit.com{}".format(name,redditor,permalink)
 
         
         channel=self.i.servers[0].channels[0]
