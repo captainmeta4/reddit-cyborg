@@ -230,7 +230,7 @@ class Bot():
 
         self.rules=[]
 
-        self.already_done = deque([],maxlen=400)
+        self.already_done = deque([],maxlen=1000)
 
         #initiate IRC connection
         self.i=irclib.IRC()
@@ -319,6 +319,9 @@ class Bot():
                 #avoid duplicate work
                 if submission.fullname in self.already_done:
                     continue
+
+                if submission.approved_by:
+                    continue
                 
                 self.already_done.append(submission.fullname)
                 single_round_stream.append(submission)
@@ -333,6 +336,9 @@ class Bot():
                 #avoid duplicate work
                 if comment.fullname in self.already_done:
                     continue
+                if comment.approved_by:
+                    continue
+                
                 self.already_done.append(comment.fullname)
                 single_round_stream.append(comment)
 
