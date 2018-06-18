@@ -19,6 +19,24 @@ ME = r.user.me()
 
 DISCLAIMER = "\n\n*^(I am a cyborg, and this action was performed automatically. Please message the moderators with any concerns.)"
 
+def wait_retry(function):
+
+    '''
+    function decorator to avoid stalling the bot when reddit or other services go down
+    '''
+
+    def wrapper(*args, **kwargs):
+        while True:
+
+            try:
+                function(*args, **kwargs)
+            except Exception as e:
+                print('crash in function {}: {}'.format(function.__name__,str(e)))
+                print('thread function {} has crashed. Sleeping 60s then restarting'.format(function.__name__))
+                time.sleep(60)
+
+    return wrapper
+
 def xor(bool1, bool2):
 
     b1 = bool(bool1)
@@ -259,7 +277,7 @@ class Bot():
             pass
         
         
-
+    @wait_retry
     def run(self):
 
         self.load_rules()
