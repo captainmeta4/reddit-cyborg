@@ -30,6 +30,8 @@ def wait_retry(function):
 
             try:
                 function(*args, **kwargs)
+            except KeyboardInterrupt:
+                break
             except Exception as e:
                 print('crash in function {}: {}'.format(function.__name__,str(e)))
                 print('thread function {} has crashed. Sleeping 60s then restarting'.format(function.__name__))
@@ -277,7 +279,7 @@ class Bot():
             pass
         
         
-    @wait_retry
+    
     def run(self):
 
         self.load_rules()
@@ -286,13 +288,7 @@ class Bot():
         pingpong = threading.Thread(target=self.pingpong, name='pingpong')
         pingpong.start()
 
-        while True:
-            try:
-                self.mainloop()
-            except KeyboardInterrupt:
-                break
-            except prawcore.exceptions.RequestException:
-                continue
+        self.mainloop()
                 
             
 
@@ -394,7 +390,7 @@ class Bot():
         channel.talk(output)
 
         
-
+    @wait_retry
     def mainloop(self):
 
         for thing in self.full_stream():
