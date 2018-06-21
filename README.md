@@ -22,7 +22,7 @@ Matching criteria:
 
 Outputs:
 
-* `action` - **must be a list** containing at least one of `remove`, `remove_parent`, `spam`, `spam_parent`, `ban`, `ban_parent`, `report`, `report_parent`, `approve`, `approve_parent`, `rts`, or `rts_parent`.
+* `action` - **must be a list** containing at least one of `remove`, `remove_parent`, `spam`, `spam_parent`, `ban`, `ban_parent`, `report`, `report_parent`, `approve`, or `approve_parent`.
 * `comment` - Comment to reply with. Comments are distinguished.
 * `ban_duration` - Length of ban. Defaults to `None`. Use when `ban` or `ban_parent` are included in `action`.
 * `ban_message` - Message given in ban notice. Defaults to empty string. Use when `ban` or `ban_parent` are included in `action`.
