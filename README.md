@@ -6,7 +6,7 @@ Reddit Cyborg is my only bot that is not available for easy widespread usage. Th
 
 If you are interested in running a clone of Cyborg yourself, feel free to fork the project.
 
-#Valid Arguments
+# Valid Arguments
 
 Cyborg operates on custom-specified rules in a manner similar to AutoModerator. The following is a list of available keys.
 
