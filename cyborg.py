@@ -125,7 +125,7 @@ class Rule():
                 print(f'{self.name} - thing is not comment')
                 return False
             elif self.type == "link submission" and thing.permalink in thing.url:
-                print(f'{self.name" - thing is not link submission')
+                print(f'{self.name} - thing is not link submission')
                 return False
             elif self.type == "text submission" and thing.permalink not in thing.url:
                 print(f'{self.name} - thing is not text submission')
@@ -334,7 +334,7 @@ class Bot():
                 if thing.edited < self.start_time:
                     continue
                 
-                #uses duples so that new edits are detected but old edits are passed by
+                #uses tuples so that new edits are detected but old edits are passed by
                 #.edited is the edit timestamp (False on unedited things)
                 if (thing.fullname, thing.edited) in self.already_done:
                     continue
