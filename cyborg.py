@@ -11,7 +11,7 @@ import prawcore
 r=praw.Reddit(client_id=os.environ.get("client_id"),
               client_secret=os.environ.get("client_secret"),
               username="captainmeta4",
-              password=os.environ.get("captainmeta4"),
+              password=os.environ.get("password"),
               user_agent="captainmeta4's mod cyborg")
 
 
