@@ -4,14 +4,15 @@ import os
 import re
 from collections import deque
 import time
-import irclib
 import prawcore
-import threading
 
 #Globals
 
-r=praw.Reddit('cyborg')
-
+r=praw.Reddit(client_id=os.environ.get("client_id"),
+              client_secret=os.environ.get("client_secret"),
+              username="captainmeta4",
+              password=os.environ.get("captainmeta4")
+              user_agent="captainmeta4's mod cyborg")
 
 
 SUBREDDIT = r.subreddit('redditcyborg')
@@ -252,41 +253,9 @@ class Bot():
 
         self.already_done = deque([],maxlen=1000)
 
-        #initiate IRC connection
-        self.i=irclib.IRC()
-        self.load_irc_config()
-
-    def load_irc_config(self):
-
-        #fetch and interpret wiki page
-        self.irc_config=next(yaml.safe_load_all(r.subreddit('redditcyborg').wiki['irc'].content_md))
-
-        for entry in self.irc_config:
-            self.i.add_server(entry,
-                         self.irc_config[entry]['port'],
-                         self.irc_config[entry]['nick'],
-                         self.irc_config[entry]['username'],
-                         self.irc_config[entry]['password'],
-                         self.irc_config[entry]['realname'],
-                         channels=self.irc_config[entry].get('channels',[]),
-                         raw=self.irc_config[entry].get('raw',False)
-                         )
-
-    
-    def pingpong(self):
-
-        for message in self.i.listen():
-            pass
-        
-        
-    
     def run(self):
 
         self.load_rules()
-
-        #spin off pingpong thread
-        pingpong = threading.Thread(target=self.pingpong, name='pingpong')
-        pingpong.start()
 
         self.mainloop()
                 
@@ -385,10 +354,7 @@ class Bot():
 
         output="{}: Triggered by /u/{} at http://reddit.com{}".format(name,redditor,permalink)
 
-        
-        channel=self.i.servers[0].channels[0]
-        channel.talk(output)
-
+        print(output)
         
     @wait_retry
     def mainloop(self):
