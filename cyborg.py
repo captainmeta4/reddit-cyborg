@@ -117,49 +117,49 @@ class Rule():
             pass
         elif isinstance(thing, praw.models.Comment):
             if "submission" in self.type:
-                print('type mismatch - thing is not submission')
+                print(f'{self.name} - thing is not submission')
                 return False
             
         elif isinstance(thing, praw.models.Submission):
             if self.type == "comment":
-                print('type mismatch - thing is not comment')
+                print(f'{self.name} - thing is not comment')
                 return False
             elif self.type == "link submission" and thing.permalink in thing.url:
-                print('type mismatch - thing is not link submission')
+                print(f'{self.name" - thing is not link submission')
                 return False
             elif self.type == "text submission" and thing.permalink not in thing.url:
-                print('type mismatch - thing is not text submission')
+                print(f'{self.name} - thing is not text submission')
                 return False
 
         if self.subreddit:
             if xor(not any(x.lower()==thing.subreddit.display_name.lower() for x in self.subreddit), "subreddit" in self.invert):
-                print('subreddit mismatch')
+                print(f'{self.name} - subreddit mismatch')
                 return False
 
         if self.author_name:
             if getattr(thing, 'author', None):
                 if xor(not any(x.lower()==thing.author.name.lower() for x in self.author_name), "author_name" in self.invert):
-                    print('author mismatch')
+                    print(f'{self.name} - author mismatch')
                     return False
 
         if self.title:
             title = getattr(thing, 'title', None)
 
             if not title:
-                print('thing does not have title')
+                print(f'{self.name} - thing does not have title')
                 return False
 
             if xor(not any(x in title for x in self.title), "title" in self.invert):
-                print('title mismatch')
+                print(f'{self.name} - title mismatch')
                 return False
 
         if self.domain:
             if not getattr(thing, 'domain', None):
-                print('domain failed')
+                print(f'{self.name} - domain failed')
                 return False
 
             if xor(not any(thing.domain.endswith(x) for x in self.domain), "domain" in self.invert):
-                print('domain mismatch')
+                print(f'{self.name} - domain mismatch')
                 return False
 
         if self.body:
@@ -167,11 +167,11 @@ class Rule():
             #get body text from comment or selftext
             body = getattr(thing, 'body', getattr(thing, 'selftext', None))
             if not body:
-                print('thing does not have body')
+                print(f'{self.name} - thing does not have body')
                 return False
             
             if xor(not any(x in body for x in self.body), "body" in self.invert):
-                print('body mismatch')
+                print(f'{self.name} - body mismatch')
                 return False
 
         if self.body_regex:
@@ -179,15 +179,15 @@ class Rule():
             body = getattr(thing, 'body', getattr(thing, 'selftext', None))
 
             if not body:
-                print('thing does not have body for body_regex')
+                print(f'{self.name} - thing does not have body for body_regex')
                 return False
 
             if xor(not any(re.search(x.lower(), body.lower()) for x in self.body_regex), "body_regex" in self.invert):
-                print('body regex mismatch')
+                print(f'{self.name} - body regex mismatch')
                 return False
 
         #at this point all criteria are satisfied. Act.
-        print("rule triggered at "+thing.permalink)
+        print(f"{self.name} triggered at {thing.permalink}")
 
         return True
 
