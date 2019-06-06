@@ -351,6 +351,10 @@ class Bot():
         name=rule.name
         permalink=thing.permalink
         redditor=getattr(thing.author,"name","[deleted]")
+        if not redditor.startswith("["):
+            redditor="/u/"+redditor
+        
+        SUBREDDIT.submit(f"{name} triggered by {redditor}", url=f"https://reddit.com{permalink}")
 
         output="{}: Triggered by /u/{} at http://reddit.com{}".format(name,redditor,permalink)
 
