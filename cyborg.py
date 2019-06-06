@@ -10,12 +10,12 @@ import prawcore
 
 r=praw.Reddit(client_id=os.environ.get("client_id"),
               client_secret=os.environ.get("client_secret"),
-              username="captainmeta4",
+              username=os.environ.get("username"),
               password=os.environ.get("password"),
               user_agent="captainmeta4's mod cyborg")
 
 
-SUBREDDIT = r.subreddit('redditcyborg')
+SUBREDDIT = r.subreddit(os.environ.get("subreddit"))
 ME = r.user.me()
 
 DISCLAIMER = "\n\n*^(I am a cyborg, and this action was performed automatically. Please message the moderators with any concerns.)"
