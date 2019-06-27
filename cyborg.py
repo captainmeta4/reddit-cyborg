@@ -378,7 +378,7 @@ class Bot():
             for rule in self.rules:
                 if rule.match_thing(thing):
                     rule.act_on(thing)
-                    self.log(rule, thing)
+                    #self.log(rule, thing)
 
                     
 
